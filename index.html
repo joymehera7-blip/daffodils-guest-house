@@ -29,6 +29,376 @@ form{max-width:550px;margin:20px auto;text-align:left;background:white;padding:2
 footer{background:#173e32;color:white;padding:35px 8%;text-align:center;line-height:2}
 footer a{color:#e8c98e}
 .small{font-size:13px;color:#777}
+.pricebox{max-width:550px;margin:20px auto;background:white;padding:22px;border-radius:10px;text-align:left;line-height:2;box-shadow:0 3px 15px #00000012}
+.total{font-size:25px;font-weight:bold;color:#214b3b;border-top:1px solid #ddd;padding-top:12px}
+.paybtn{background:#16834b;color:white;width:100%;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+<h2>DAFFODILS</h2>
+<nav>
+<a href="#home">Home</a>
+<a href="#rooms">Rooms</a>
+<a href="#booking">Booking</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<div class="hero" id="home">
+<div>
+<p>WELCOME TO GOA</p>
+<h1>Daffodils Guest House</h1>
+<p>Your comfortable stay in beautiful Calangute</p>
+<a href="#booking" class="btn">BOOK YOUR STAY</a>
+<a href="https://wa.me/919371921123" class="btn">WHATSAPP US</a>
+</div>
+</div>
+
+<section>
+<h2>Welcome to Daffodils Guest House</h2>
+<p>Enjoy a comfortable and relaxing stay at Gaura Vaddo, Calangute, Goa.</p>
+<p>Experience the beauty of Goa with a welcoming place to stay.</p>
+</section>
+
+<section id="rooms">
+<h2>Our Accommodation</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=700" alt="Guest room">
+<h3>Comfortable Rooms</h3>
+<p>Relax in a welcoming and comfortable room.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700" alt="Room interior">
+<h3>Relaxing Stay</h3>
+<p>A peaceful place to enjoy your Goa holiday.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700" alt="Holiday accommodation">
+<h3>Goa Experience</h3>
+<p>Enjoy your holiday in Calangute.</p>
+</div>
+</div>
+</section>
+
+<section id="booking">
+<h2>Book Your Stay</h2>
+<p>Check your estimated booking price and send your request.</p>
+
+<div class="pricebox">
+<h3>Our Room Prices</h3>
+Room per night (2 people): <strong>₹1,800</strong><br>
+Extra person per night: <strong>₹800</strong><br>
+Extra mattress per night: <strong>₹350</strong>
+<p class="small">Room price includes up to 2 people.</p>
+</div>
+
+<form id="bookingForm">
+<label>Your Name</label>
+<input id="guest" required placeholder="Enter your full name">
+
+<label>Phone Number</label>
+<input id="phone" required type="tel" placeholder="Your contact number">
+
+<label>Check-in Date</label>
+<input id="checkin" required type="date">
+
+<label>Check-out Date</label>
+<input id="checkout" required type="date">
+
+<label>Number of Guests</label>
+<select id="guests">
+<option value="1">1</option>
+<option value="2" selected>2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+</select>
+
+<label>Extra Mattresses</label>
+<select id="mattresses">
+<option value="0">No extra mattress</option>
+<option value="1">1 mattress</option>
+<option value="2">2 mattresses</option>
+<option value="3">3 mattresses</option>
+<option value="4">4 mattresses</option>
+</select>
+
+<label>Room Preference</label>
+<select id="room">
+<option>Any available room</option>
+<option>Single room</option>
+<option>Double room</option>
+</select>
+
+<button class="btn" type="button" id="calculate">CALCULATE PRICE</button>
+
+<div class="pricebox" id="priceBox" hidden>
+<h3>Booking Price Details</h3>
+<div id="priceDetails"></div>
+<div class="total" id="totalPrice"></div>
+<p class="small">This is an estimated price. Final availability and charges will be confirmed by the guest house.</p>
+<button class="btn paybtn" type="button" id="payButton">PAY WITH UPI</button>
+<p>UPI ID: <strong>paytm.s25pxbf@pty</strong></p>
+<button class="btn" type="button" id="copyUPI">COPY UPI ID</button>
+<p class="small">UPI payment opens your payment app. Keep your payment receipt and share it with us on WhatsApp. Payment is not automatically verified by this website.</p>
+</div>
+
+<button class="btn" type="submit">SEND BOOKING REQUEST ON WHATSAPP</button>
+<p class="small">Your booking is a request, not a confirmed reservation. We will confirm room availability and payment.</p>
+</form>
+</section>
+
+<section>
+<h2>Quick Booking</h2>
+<p>In a hurry? Contact us directly on WhatsApp.</p>
+<a class="btn" href="https://wa.me/919371921123?text=Hello%2C%20I%20want%20to%20book%20a%20room%20at%20Daffodils%20Guest%20House.">BOOK NOW ON WHATSAPP</a>
+</section>
+
+<section id="reviews">
+<h2>Guest Reviews</h2>
+<p>Stayed with us? Share your experience and rate your stay.</p>
+<form id="reviewForm">
+<label>Your Name</label>
+<input id="reviewName" required placeholder="Your name">
+<label>Your Rating</label>
+<div class="stars" id="starPicker">
+<span data-rating="1">★</span><span data-rating="2">★</span><span data-rating="3">★</span><span data-rating="4">★</span><span data-rating="5">★</span>
+</div>
+<label>Your Review</label>
+<textarea id="reviewText" required rows="4" placeholder="Write about your stay"></textarea>
+<button class="btn" type="submit">SUBMIT REVIEW</button>
+</form>
+<div id="reviewList"></div>
+<p class="small">Reviews are saved only in this browser.</p>
+</section>
+
+<section id="contact">
+<h2>Find Us in Goa</h2>
+<p>Daffodils Guest House</p>
+<p>H.No 1/399, Gaura Vaddo, Calangute, Bardez, Goa - 403516</p>
+<p>Phone: <a href="tel:+919371921123">+91 9371921123</a></p>
+<p>Phone: <a href="tel:+919930308472">+91 9930308472</a></p>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=H.No+1%2F399+Gaura+Vaddo+Calangute+Goa+403516">GET DIRECTIONS</a>
+</section>
+
+<footer>
+<h2 style="color:white">DAFFODILS GUEST HOUSE</h2>
+<p>Gaura Vaddo, Calangute, Goa - 403516</p>
+<p>Call us: +91 9371921123 | +91 9930308472</p>
+<p>© 2026 Daffodils Guest House. All rights reserved.</p>
+</footer>
+
+<script>
+const UPI_ID = "paytm.s25pxbf@pty";
+const UPI_NAME = "Daffodils Guest House";
+const WHATSAPP = "919371921123";
+
+const $ = id => document.getElementById(id);
+let bookingTotal = 0;
+let bookingNights = 0;
+let bookingCalculated = false;
+
+function localDateString(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth()+1).padStart(2,"0");
+  const d = String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
+
+const today = localDateString(new Date());
+$("checkin").min = today;
+$("checkout").min = today;
+
+$("checkin").addEventListener("change", () => {
+  $("checkout").min = $("checkin").value || today;
+  bookingCalculated = false;
+});
+
+["checkout","guests","mattresses"].forEach(id => {
+  $(id).addEventListener("change", () => bookingCalculated = false);
+});
+
+function calculateBooking() {
+  const checkin = $("checkin").value;
+  const checkout = $("checkout").value;
+  const guests = Number($("guests").value);
+  const mattresses = Number($("mattresses").value);
+
+  if (!checkin || !checkout) {
+    alert("Please select check-in and check-out dates.");
+    return false;
+  }
+
+  const start = new Date(checkin + "T12:00:00");
+  const end = new Date(checkout + "T12:00:00");
+  bookingNights = Math.round((end-start)/86400000);
+
+  if (checkin < today || bookingNights <= 0) {
+    alert("Please select valid future dates. Check-out must be after check-in.");
+    return false;
+  }
+
+  const roomCost = 1800 * bookingNights;
+  const extraPeople = Math.max(0, guests-2);
+  const extraPersonCost = extraPeople * 800 * bookingNights;
+  const mattressCost = mattresses * 350 * bookingNights;
+
+  bookingTotal = roomCost + extraPersonCost + mattressCost;
+  bookingCalculated = true;
+
+  $("priceDetails").innerHTML =
+    `Number of nights: <strong>${bookingNights}</strong><br>
+     Room: ₹1,800 × ${bookingNights} = ₹${roomCost.toLocaleString("en-IN")}<br>
+     Extra people (${extraPeople}): ₹${extraPersonCost.toLocaleString("en-IN")}<br>
+     Extra mattresses (${mattresses}): ₹${mattressCost.toLocaleString("en-IN")}`;
+
+  $("totalPrice").textContent =
+    "Total: ₹" + bookingTotal.toLocaleString("en-IN");
+
+  $("priceBox").hidden = false;
+  return true;
+}
+
+$("calculate").addEventListener("click", calculateBooking);
+
+$("payButton").addEventListener("click", () => {
+  if (!bookingCalculated && !calculateBooking()) return;
+
+  const params = new URLSearchParams({
+    pa: UPI_ID,
+    pn: UPI_NAME,
+    am: bookingTotal.toFixed(2),
+    cu: "INR",
+    tn: "Daffodils Guest House booking"
+  });
+
+  window.location.href = "upi://pay?" + params.toString();
+});
+
+$("copyUPI").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(UPI_ID);
+    alert("UPI ID copied!");
+  } catch(e) {
+    alert("Your UPI ID is: " + UPI_ID);
+  }
+});
+
+$("bookingForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  if (!bookingCalculated && !calculateBooking()) return;
+
+  const data = `Hello Daffodils Guest House!
+Booking Request:
+Name: ${$("guest").value}
+Phone: ${$("phone").value}
+Check-in: ${$("checkin").value}
+Check-out: ${$("checkout").value}
+Nights: ${bookingNights}
+Guests: ${$("guests").value}
+Extra mattresses: ${$("mattresses").value}
+Room: ${$("room").value}
+Estimated Total: ₹${bookingTotal}
+UPI ID: ${UPI_ID}
+Please confirm availability.`;
+
+  window.open(
+    "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(data),
+    "_blank"
+  );
+});
+
+let selectedRating = 0;
+
+document.querySelectorAll("#starPicker span").forEach(star => {
+  star.addEventListener("click", () => {
+    selectedRating = Number(star.dataset.rating);
+    document.querySelectorAll("#starPicker span").forEach(s => {
+      s.classList.toggle("active", Number(s.dataset.rating)<=selectedRating);
+    });
+  });
+});
+
+function escapeText(s) {
+  return String(s).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function showReviews() {
+  const reviews = JSON.parse(localStorage.getItem("daffodilsReviews") || "[]");
+  $("reviewList").innerHTML = reviews.map(r =>
+    `<div class="review"><strong>${escapeText(r.name)}</strong>
+    <p style="color:#d69e28">${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</p>
+    <p>${escapeText(r.text)}</p></div>`
+  ).join("");
+}
+
+$("reviewForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  if (!selectedRating) {
+    alert("Please select a star rating.");
+    return;
+  }
+
+  const reviews = JSON.parse(localStorage.getItem("daffodilsReviews") || "[]");
+  reviews.unshift({
+    name: $("reviewName").value,
+    rating: selectedRating,
+    text: $("reviewText").value
+  });
+
+  localStorage.setItem("daffodilsReviews", JSON.stringify(reviews));
+  e.target.reset();
+  selectedRating = 0;
+
+  document.querySelectorAll("#starPicker span").forEach(s => s.classList.remove("active"));
+  showReviews();
+  alert("Thank you for your review!");
+});
+
+showReviews();
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daffodils Guest House | Calangute Goa</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:#26352d;background:#faf9f5}
+header{background:#173e32;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+header h2{margin:0;letter-spacing:2px}
+nav a{color:white;text-decoration:none;margin:10px;font-size:14px}
+.hero{min-height:440px;background:linear-gradient(#102c2399,#102c2399),url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:35px}
+.hero h1{font-size:46px;margin:10px}
+.hero p{font-size:19px}
+.btn{display:inline-block;background:#c6a66b;color:#172d24;padding:14px 24px;border:0;border-radius:5px;text-decoration:none;font-weight:bold;cursor:pointer;margin:8px}
+section{padding:55px 8%;text-align:center}
+h2{color:#214b3b}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 3px 15px #00000012;padding-bottom:20px}
+.card img{width:100%;height:190px;object-fit:cover}
+.card p{padding:0 15px;line-height:1.6}
+input,select,textarea{width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:5px;font:inherit}
+form{max-width:550px;margin:20px auto;text-align:left;background:white;padding:25px;border-radius:10px}
+.stars{font-size:30px;color:#d5d5d5;cursor:pointer}
+.stars span.active{color:#e5a323}
+.review{background:white;padding:20px;margin:12px auto;max-width:600px;border-radius:8px;text-align:left}
+footer{background:#173e32;color:white;padding:35px 8%;text-align:center;line-height:2}
+footer a{color:#e8c98e}
+.small{font-size:13px;color:#777}
 </style>
 </head>
 <body>
