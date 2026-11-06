@@ -1,0 +1,9 @@
+# Supabase local development configuration.
+# Deploy with: supabase functions deploy availability --no-verify-jwt
+#             supabase functions deploy booking-request --no-verify-jwt
+
+[functions.availability]
+verify_jwt = false
+
+[functions.booking-request]
+verify_jwt = false
