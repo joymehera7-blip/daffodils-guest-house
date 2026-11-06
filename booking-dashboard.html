@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123d32"><title>Daffodils | Booking Manager</title>
+<style>
+:root{--g:#123d32;--g2:#1d5947;--gold:#d8b777;--bg:#f5f4ef;--ink:#24352e;--muted:#68736d;--line:#e4e6df}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px Arial,sans-serif}header{background:var(--g);color:white;padding:20px max(20px,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}header strong{letter-spacing:1.5px}header a{color:#f0d9a8;text-decoration:none}.wrap{max-width:1100px;margin:auto;padding:28px 18px}.eyebrow{color:#967641;text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:bold}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}h1{font-size:30px;color:var(--g);margin:7px 0}.sub{color:var(--muted);margin:0 0 22px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:18px}.metric{font-size:28px;font-weight:bold;color:var(--g);margin-top:8px}.label{font-size:13px;color:var(--muted)}.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:18px}.panel h2{font-size:19px;color:var(--g);margin:0 0 14px}.rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.room{border:1px solid var(--line);border-radius:8px;padding:13px 8px;text-align:center}.room b{display:block;color:var(--g)}.room small{color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2d9466;margin-right:5px}.free{color:#26734e}.booked{color:#b36b28}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}input,select{width:100%;padding:11px;border:1px solid #d9ded9;border-radius:7px;font:inherit;background:white}button{background:var(--g);color:white;border:0;border-radius:7px;padding:12px 16px;font-weight:bold;cursor:pointer}button.secondary{background:#eeeae0;color:var(--g)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.notice{background:#fff8e8;border:1px solid #ead8ad;border-radius:9px;padding:12px 14px;color:#66532e;font-size:13px;line-height:1.5;margin-top:18px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:600}.empty{color:var(--muted);padding:14px 0;font-size:13px}@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.rooms{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><strong>DAFFODILS GUEST HOUSE</strong><a href="./index.html">← View guest website</a></header>
+<main class="wrap">
+<div class="top"><div><div class="eyebrow">Property dashboard</div><h1>Booking Manager</h1><p class="sub">Calangute, Goa · 8 rooms</p></div><button onclick="document.getElementById('newBooking').scrollIntoView({behavior:'smooth'})">+ Add booking</button></div>
+<div class="grid">
+<div class="card"><div class="label">Total rooms</div><div class="metric">8</div></div>
+<div class="card"><div class="label">Bookings saved here</div><div class="metric" id="total">0</div></div>
+<div class="card"><div class="label">Currently occupied</div><div class="metric" id="occupied">0</div></div>
+<div class="card"><div class="label">Available rooms</div><div class="metric" id="available">8</div></div>
+</div>
+<div class="layout">
+<section class="panel"><h2>Room status · Today</h2><div class="rooms" id="rooms"></div><p class="label" style="margin:14px 0 0"><span class="dot"></span>Available &nbsp; <span style="color:#b36b28">●</span> Occupied (based on bookings saved in this browser)</p></section>
+<section class="panel" id="newBooking"><h2>Add a booking</h2>
+<form id="form"><div class="formgrid">
+<div><label for="guest">Guest name</label><input id="guest" required placeholder="Full name"></div>
+<div><label for="phone">Phone</label><input id="phone" required type="tel" placeholder="Phone number"></div>
+<div><label for="room">Room</label><select id="room" required></select></div>
+<div><label for="guests">Guests</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+<div><label for="in">Check-in</label><input id="in" type="date" required></div>
+<div><label for="out">Check-out</label><input id="out" type="date" required></div>
+</div><div class="actions"><button type="submit">Save booking</button><button class="secondary" type="reset">Clear</button></div></form>
+</section></div>
+<section class="panel" style="margin-top:16px"><h2>Booking records</h2><div class="tablewrap"><table><thead><tr><th>Guest</th><th>Room</th><th>Dates</th><th>Phone</th><th>Action</th></tr></thead><tbody id="records"></tbody></table></div><p id="empty" class="empty">No bookings saved yet. Add a booking above.</p></section>
+<div class="notice"><b>Prototype limitation:</b> This first dashboard saves records only in this browser on this device. It is not yet a shared live database and does not connect to Booking.com, MakeMyTrip, Goibibo, Agoda or Cleartrip. Real-time OTA synchronization requires a supported channel-manager/API partnership and secure server credentials. Do not use this prototype as the final source of room availability.</div>
+</main>
+<script>
+const roomNames=['101','102','103','104','201','202','203','204'];
+const $=id=>document.getElementById(id);
+let bookings=[];try{bookings=JSON.parse(localStorage.getItem('daffodilsBookings')||'[]')}catch(e){}
+roomNames.forEach(n=>{$('room').add(new Option('Room '+n,n))});
+const today=new Date();const localDate=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);$('in').min=localDate;$('out').min=localDate;
+$('in').addEventListener('change',()=>{$('out').min=$('in').value});
+function save(){localStorage.setItem('daffodilsBookings',JSON.stringify(bookings));render()}
+function render(){
+ const active=bookings.filter(b=>b.checkin<=localDate&&b.checkout>localDate);
+ $('total').textContent=bookings.length;$('occupied').textContent=new Set(active.map(b=>b.room)).size;$('available').textContent=8-new Set(active.map(b=>b.room)).size;
+ $('rooms').innerHTML=roomNames.map(n=>{const busy=active.some(b=>b.room===n);return '<div class="room"><b>Room '+n+'</b><small class="'+(busy?'booked':'free')+'">'+(busy?'● Occupied':'● Available')+'</small></div>'}).join('');
+ $('records').innerHTML=bookings.map((b,i)=>'<tr><td>'+esc(b.guest)+'</td><td>'+b.room+'</td><td>'+b.checkin+' → '+b.checkout+'</td><td>'+esc(b.phone)+'</td><td><button class="secondary" onclick="removeBooking('+i+')">Delete</button></td></tr>').join('');
+ $('empty').style.display=bookings.length?'none':'block';
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function removeBooking(i){if(confirm('Delete this booking record?')){bookings.splice(i,1);save()}}
+$('form').addEventListener('submit',e=>{e.preventDefault();const b={guest:$('guest').value.trim(),phone:$('phone').value.trim(),room:$('room').value,guests:$('guests').value,checkin:$('in').value,checkout:$('out').value};if(b.checkout<=b.checkin){alert('Check-out must be after check-in.');return}const conflict=bookings.some(x=>x.room===b.room&&b.checkin<x.checkout&&b.checkout>x.checkin);if(conflict){alert('This room already has a booking for overlapping dates.');return}bookings.push(b);save();e.target.reset();alert('Booking saved on this device.');});
+render();
+</script>
+</body></html>
