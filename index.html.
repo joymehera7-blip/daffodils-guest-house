@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daffodils Guest House | Calangute Goa</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:#26352d;background:#faf9f5}
+header{background:#173e32;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+header h2{margin:0;letter-spacing:2px}
+nav a{color:white;text-decoration:none;margin:10px;font-size:14px}
+.hero{min-height:440px;background:linear-gradient(#102c2399,#102c2399),url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:35px}
+.hero h1{font-size:46px;margin:10px}
+.hero p{font-size:19px}
+.btn{display:inline-block;background:#c6a66b;color:#172d24;padding:14px 24px;border:0;border-radius:5px;text-decoration:none;font-weight:bold;cursor:pointer;margin:8px}
+section{padding:55px 8%;text-align:center}
+h2{color:#214b3b}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 3px 15px #00000012;padding-bottom:20px}
+.card img{width:100%;height:190px;object-fit:cover}
+.card p{padding:0 15px;line-height:1.6}
+input,select,textarea{width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:5px;font:inherit}
+form{max-width:550px;margin:20px auto;text-align:left;background:white;padding:25px;border-radius:10px}
+.stars{font-size:30px;color:#d5d5d5;cursor:pointer}
+.stars span.active{color:#e5a323}
+.review{background:white;padding:20px;margin:12px auto;max-width:600px;border-radius:8px;text-align:left}
+footer{background:#173e32;color:white;padding:35px 8%;text-align:center;line-height:2}
+footer a{color:#e8c98e}
+.small{font-size:13px;color:#777}
+</style>
+</head>
+<body>
+
+<header>
+<h2>DAFFODILS</h2>
+<nav>
+<a href="#home">Home</a>
+<a href="#rooms">Rooms</a>
+<a href="#booking">Booking</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<div class="hero" id="home">
+<div>
+<p>WELCOME TO GOA</p>
+<h1>Daffodils Guest House</h1>
+<p>Your comfortable stay in beautiful Calangute</p>
+<a href="#booking" class="btn">BOOK YOUR STAY</a>
+<a href="https://wa.me/919371921123" class="btn">WHATSAPP US</a>
+</div>
+</div>
+
+<section>
+<h2>Welcome to Daffodils Guest House</h2>
+<p>Enjoy a comfortable and relaxing stay at Gaura Vaddo, Calangute, Goa.</p>
+<p>Experience the beauty of Goa with a welcoming place to stay.</p>
+</section>
+
+<section id="rooms">
+<h2>Our Accommodation</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=700" alt="Guest room">
+<h3>Comfortable Rooms</h3>
+<p>Relax in a welcoming and comfortable room.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700" alt="Room interior">
+<h3>Relaxing Stay</h3>
+<p>A peaceful place to enjoy your Goa holiday.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700" alt="Holiday accommodation">
+<h3>Goa Experience</h3>
+<p>Enjoy your holiday in Calangute.</p>
+</div>
+</div>
+</section>
+
+<section id="booking">
+<h2>Book Your Stay</h2>
+<p>Enter your details and send your booking request directly to us.</p>
+<form id="bookingForm">
+<label>Your Name</label>
+<input id="guest" required placeholder="Enter your full name">
+<label>Phone Number</label>
+<input id="phone" required type="tel" placeholder="Your contact number">
+<label>Check-in Date</label>
+<input id="checkin" required type="date">
+<label>Check-out Date</label>
+<input id="checkout" required type="date">
+<label>Number of Guests</label>
+<select id="guests">
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+</select>
+<label>Room preference</label>
+<select id="room">
+<option>Any available room</option>
+<option>Single room</option>
+<option>Double room</option>
+</select>
+<button class="btn" type="submit">SEND BOOKING REQUEST</button>
+<p class="small">Your booking is a request, not a confirmed reservation. We will confirm availability and payment with you.</p>
+</form>
+</section>
+
+<section>
+<h2>Quick Booking</h2>
+<p>In a hurry? Contact us directly on WhatsApp.</p>
+<a class="btn" href="https://wa.me/919371921123?text=Hello%2C%20I%20want%20to%20book%20a%20room%20at%20Daffodils%20Guest%20House.">BOOK NOW ON WHATSAPP</a>
+</section>
+
+<section id="reviews">
+<h2>Guest Reviews</h2>
+<p>Stayed with us? Share your experience and rate your stay.</p>
+<form id="reviewForm">
+<label>Your Name</label>
+<input id="reviewName" required placeholder="Your name">
+<label>Your Rating</label>
+<div class="stars" id="starPicker">
+<span data-rating="1">★</span><span data-rating="2">★</span><span data-rating="3">★</span><span data-rating="4">★</span><span data-rating="5">★</span>
+</div>
+<label>Your Review</label>
+<textarea id="reviewText" required rows="4" placeholder="Write about your stay"></textarea>
+<button class="btn" type="submit">SUBMIT REVIEW</button>
+</form>
+<div id="reviewList"></div>
+<p class="small">Reviews submitted here are currently saved only in this browser. Public guest reviews require a connected database.</p>
+</section>
+
+<section id="contact">
+<h2>Find Us in Goa</h2>
+<p>Daffodils Guest House</p>
+<p>H.No 1/399, Gaura Vaddo, Calangute, Bardez, Goa - 403516</p>
+<p>Phone: <a href="tel:+919371921123">+91 9371921123</a></p>
+<p>Phone: <a href="tel:+919930308472">+91 9930308472</a></p>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=H.No+1%2F399+Gaura+Vaddo+Calangute+Goa+403516">GET DIRECTIONS</a>
+</section>
+
+<footer>
+<h2 style="color:white">DAFFODILS GUEST HOUSE</h2>
+<p>Gaura Vaddo, Calangute, Goa - 403516</p>
+<p>Call us: +91 9371921123 | +91 9930308472</p>
+<p>© 2026 Daffodils Guest House. All rights reserved.</p>
+</footer>
+
+<script>
+const numbers = ["919371921123","919930308472"];
+
+document.getElementById("bookingForm").addEventListener("submit",function(e){
+e.preventDefault();
+const data = `Hello Daffodils Guest House!
+Booking request:
+Name: ${guest.value}
+Phone: ${phone.value}
+Check-in: ${checkin.value}
+Check-out: ${checkout.value}
+Guests: ${guests.value}
+Room: ${room.value}
+Please confirm availability and payment details.`;
+window.open("https://wa.me/"+numbers[0]+"?text="+encodeURIComponent(data),"_blank");
+});
+
+let selectedRating=0;
+document.querySelectorAll("#starPicker span").forEach(star=>{
+star.addEventListener("click",()=>{
+selectedRating=Number(star.dataset.rating);
+document.querySelectorAll("#starPicker span").forEach(s=>{
+s.classList.toggle("active",Number(s.dataset.rating)<=selectedRating);
+});
+});
+});
+
+function showReviews(){
+const reviews=JSON.parse(localStorage.getItem("daffodilsReviews")||"[]");
+document.getElementById("reviewList").innerHTML=reviews.map(r=>
+`<div class="review"><strong>${escapeText(r.name)}</strong>
+<p style="color:#d69e28">${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</p>
+<p>${escapeText(r.text)}</p></div>`
+).join("");
+}
+function escapeText(s){
+return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+document.getElementById("reviewForm").addEventListener("submit",function(e){
+e.preventDefault();
+if(!selectedRating){alert("Please select a star rating.");return;}
+const reviews=JSON.parse(localStorage.getItem("daffodilsReviews")||"[]");
+reviews.unshift({
+name:document.getElementById("reviewName").value,
+rating:selectedRating,
+text:document.getElementById("reviewText").value
+});
+localStorage.setItem("daffodilsReviews",JSON.stringify(reviews));
+this.reset();
+selectedRating=0;
+document.querySelectorAll("#starPicker span").forEach(s=>s.classList.remove("active"));
+showReviews();
+alert("Thank you for your review!");
+});
+showReviews();
+
+const today=new Date().toISOString().split("T")[0];
+document.getElementById("checkin").min=today;
+document.getElementById("checkout").min=today;
+document.getElementById("checkin").addEventListener("change",()=>{
+document.getElementById("checkout").min=document.getElementById("checkin").value;
+});
+</script>
+</body>
+</html>
