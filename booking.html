@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#123d32">
+  <meta name="description" content="Check room availability and send a booking request to Daffodils Guest House in Calangute, Goa.">
+  <title>Check availability | Daffodils Guest House</title>
+  <style>
+    :root{--green:#123d32;--green2:#1d5947;--gold:#d8b777;--cream:#fbf8f1;--ink:#23352e;--muted:#66736d;--line:#e4e6df;--white:#fff;--red:#9c3d32}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.55 Arial,Helvetica,sans-serif}a{color:inherit}.top{background:var(--green);color:white;padding:15px max(5%,calc((100% - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.brand{text-decoration:none;font-weight:800;letter-spacing:2px}.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:3px;font-weight:500}.top nav{display:flex;gap:18px}.top nav a{font-size:14px;text-decoration:none}.top nav a:hover{color:var(--gold)}main{max-width:1120px;margin:42px auto;padding:0 20px}.eyebrow{color:#98783f;text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:bold}.heading{max-width:720px;margin-bottom:26px}.heading h1{font-size:clamp(34px,5vw,52px);line-height:1.12;margin:8px 0 12px}.heading p{color:var(--muted);margin:0}.notice{border:1px solid #e8d7a9;background:#fff9e9;border-radius:8px;padding:13px 16px;margin:20px 0 28px;font-size:14px}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:12px;padding:25px;box-shadow:0 8px 28px #193c2b0a}.card h2{margin:0 0 18px;font-size:23px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-weight:700;font-size:14px}input,select{width:100%;padding:12px;border:1px solid #cbd2cc;border-radius:6px;font:inherit;background:#fff;color:var(--ink)}input:focus,select:focus{outline:2px solid #84aa98;border-color:var(--green2)}.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 18px;border:0;border-radius:6px;background:var(--gold);color:#17372d;font-weight:700;text-decoration:none;cursor:pointer;font:inherit}.btn:hover{filter:brightness(.96)}.btn.block{width:100%;margin-top:20px}.result{display:none;margin-top:16px;padding:13px 15px;border-radius:7px}.result.ok{display:block;background:#edf7ef;color:#235d32}.result.bad{display:block;background:#fff0ee;color:var(--red)}.side{background:var(--green);color:white}.side h2{color:#fff}.side p{color:#e1e9e4}.side .gold{color:var(--gold);font-weight:bold}.side a{color:white}.steps{padding-left:20px}.steps li{margin:10px 0}.fine{color:var(--muted);font-size:13px;margin:12px 0 0}.rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.room{padding:10px;border:1px solid var(--line);border-radius:7px;text-align:center;font-size:13px}.room strong{display:block}.footer{margin-top:44px;background:#0e3028;color:#e8eee9;text-align:center;padding:25px 15px;font-size:13px}.footer a{color:var(--gold)}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.top{justify-content:center;text-align:center}.top nav{justify-content:center;flex-wrap:wrap}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.rooms{grid-template-columns:repeat(2,1fr)}main{margin-top:30px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">DAFFODILS<small>GUEST HOUSE · GOA</small></a>
+    <nav aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#rooms">Rooms</a><a href="admin.html">Host dashboard</a></nav>
+  </header>
+  <main>
+    <div class="heading"><div class="eyebrow">Your Goa getaway</div><h1>Find your stay in Calangute</h1><p>Share your dates and we’ll get back to you to confirm availability and the current room rate.</p></div>
+    <div class="notice"><strong>Booking requests are not confirmed instantly.</strong> Please wait for a reply from the guest house before making travel plans. This starter version does not yet sync availability with Booking.com, MakeMyTrip, or other devices.</div>
+    <div class="grid">
+      <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">Check dates &amp; request a room</h2>
+        <form id="bookingForm">
+          <div class="fields">
+            <div class="field"><label for="guest">Your name</label><input id="guest" name="guest" autocomplete="name" required placeholder="Full name"></div>
+            <div class="field"><label for="phone">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="Contact number"></div>
+            <div class="field"><label for="checkin">Check-in</label><input id="checkin" name="checkin" type="date" required></div>
+            <div class="field"><label for="checkout">Check-out</label><input id="checkout" name="checkout" type="date" required></div>
+            <div class="field"><label for="guests">Guests</label><select id="guests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></div>
+            <div class="field"><label for="room">Room preference</label><select id="room" name="room"><option value="Any available room">Any available room</option></select></div>
+          </div>
+          <div id="availability" class="result" role="status" aria-live="polite"></div>
+          <button class="btn block" type="submit">Send booking request on WhatsApp</button>
+          <p class="fine">No online payment is collected. Your request will open WhatsApp so you can send it to the host.</p>
+        </form>
+      </section>
+      <aside class="card side"><div class="eyebrow">Simple &amp; personal</div><h2>How it works</h2><ol class="steps"><li>Choose your dates and room preference.</li><li>Send your enquiry directly to our team.</li><li>We’ll confirm availability, rates, and booking details with you.</li></ol><p><span class="gold">Need help now?</span><br>Call <a href="tel:+919371921123">+91 9371921123</a></p><p>H.No 1/399, Gaura Vaddo, Calangute, Goa – 403516</p></aside>
+    </div>
+    <section class="card" style="margin-top:24px"><div class="eyebrow">Eight guest rooms</div><h2 style="margin:5px 0">Our rooms</h2><p class="fine" style="margin:0">Room selections are preferences only; the host will confirm the assigned room.</p><div class="rooms" id="roomList"></div></section>
+  </main>
+  <footer class="footer">DAFFODILS GUEST HOUSE · Gaura Vaddo, Calangute, Goa · <a href="tel:+919371921123">+91 9371921123</a></footer>
+  <script>
+    (() => {
+      const STORAGE_KEY = 'daffodils-booking-mvp-v1';
+      const rooms = ['101','102','103','104','201','202','203','204'];
+      const form = document.getElementById('bookingForm');
+      const roomSelect = document.getElementById('room');
+      const checkin = document.getElementById('checkin');
+      const checkout = document.getElementById('checkout');
+      const result = document.getElementById('availability');
+      const today = new Date();
+      const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0,10);
+      checkin.min = localToday; checkout.min = localToday;
+      rooms.forEach(number => { const opt = document.createElement('option'); opt.value = `Room ${number}`; opt.textContent = `Room ${number}`; roomSelect.appendChild(opt); });
+      document.getElementById('roomList').innerHTML = rooms.map((number, i) => `<div class="room"><strong>Room ${number}</strong>${i < 4 ? 'First floor' : 'Second floor'}</div>`).join('');
+      const readData = () => { try { const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"requests":[],"blocked":[]}'); return {requests:Array.isArray(data.requests)?data.requests:[],blocked:Array.isArray(data.blocked)?data.blocked:[]}; } catch { return {requests:[],blocked:[]}; } };
+      const overlaps = (aStart,aEnd,bStart,bEnd) => aStart < bEnd && bStart < aEnd;
+      const isAvailable = (room,start,end) => {
+        const data = readData();
+        const candidates = room === 'Any available room' ? rooms.map(n => `Room ${n}`) : [room];
+        return candidates.some(candidate => {
+          const number = candidate.replace('Room ','');
+          const busyRequest = data.requests.some(r => r.room === candidate && r.status !== 'cancelled' && overlaps(start,end,r.checkin,r.checkout));
+          const blocked = data.blocked.some(b => b.room === number && overlaps(start,end,b.start,b.end));
+          return !busyRequest && !blocked;
+        });
+      };
+      function checkAvailability() {
+        if (!checkin.value || !checkout.value || checkout.value <= checkin.value) { result.className='result'; result.textContent=''; return false; }
+        const available = isAvailable(roomSelect.value,checkin.value,checkout.value);
+        result.className = `result ${available?'ok':'bad'}`;
+        result.textContent = available ? 'No conflicting local demo requests found. The host must still confirm availability.' : 'These dates conflict with a locally recorded request or blocked room. Try another room or dates, and contact the host to verify.';
+        return available;
+      }
+      checkin.addEventListener('change', () => { checkout.min = checkin.value || localToday; checkAvailability(); });
+      checkout.addEventListener('change', checkAvailability);
+      roomSelect.addEventListener('change', checkAvailability);
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        if (checkout.value <= checkin.value) { result.className='result bad'; result.textContent='Check-out must be after check-in.'; return; }
+        const request = {id:`DG-${Date.now().toString(36).toUpperCase()}`,guest:document.getElementById('guest').value.trim(),phone:document.getElementById('phone').value.trim(),checkin:checkin.value,checkout:checkout.value,guests:document.getElementById('guests').value,room:roomSelect.value,status:'pending',createdAt:new Date().toISOString()};
+        const data = readData(); data.requests.push(request);
+        try { localStorage.setItem(STORAGE_KEY,JSON.stringify(data)); } catch { /* Continue with WhatsApp if browser storage is unavailable. */ }
+        const message = ['Hello Daffodils Guest House, I would like to request a booking.','Request ID: '+request.id,'Name: '+request.guest,'Phone: '+request.phone,'Check-in: '+request.checkin,'Check-out: '+request.checkout,'Guests: '+request.guests,'Room preference: '+request.room,'Please confirm availability and the current rate.'].join('\n');
+        window.open('https://wa.me/919371921123?text='+encodeURIComponent(message),'_blank','noopener');
+        result.className='result ok'; result.textContent=`Request ${request.id} saved in this browser. WhatsApp should open so you can send it; the booking is pending host confirmation.`;
+      });
+    })();
+  </script>
+</body>
+</html>

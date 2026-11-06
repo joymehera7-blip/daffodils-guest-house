@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#123d32">
+  <title>Host dashboard | Daffodils Guest House</title>
+  <style>
+    :root{--green:#123d32;--gold:#d8b777;--cream:#fbf8f1;--ink:#23352e;--muted:#66736d;--line:#e4e6df;--red:#9c3d32}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.5 Arial,Helvetica,sans-serif}.top{background:var(--green);color:#fff;padding:15px max(5%,calc((100% - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.brand{color:#fff;text-decoration:none;font-weight:800;letter-spacing:2px}.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:3px;font-weight:500}.top nav{display:flex;gap:18px}.top nav a{color:white;text-decoration:none}main{max-width:1120px;margin:34px auto;padding:0 20px}.title{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap}.title h1{font-size:clamp(30px,5vw,42px);margin:4px 0}.eyebrow{color:#98783f;text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:bold}.notice{background:#fff9e9;border:1px solid #e8d7a9;border-radius:8px;padding:13px 15px;margin:20px 0;font-size:14px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}.stat strong{font-size:27px;display:block;color:var(--green)}.stat span{color:var(--muted);font-size:13px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.section-title h2{font-size:21px;margin:0 0 12px}.panel{margin-top:18px}.btn{border:0;border-radius:5px;padding:10px 14px;font:inherit;font-weight:bold;cursor:pointer;background:var(--green);color:white}.btn.secondary{background:#e8ede8;color:var(--ink)}.btn.danger{background:#fff0ee;color:var(--red)}.btn.small{padding:6px 9px;font-size:13px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:740px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);vertical-align:middle}th{font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}td{font-size:14px}.status{display:inline-block;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:bold;background:#fff5d8;color:#75590f}.status.confirmed{background:#e8f5e9;color:#256234}.status.cancelled{background:#f1f1f1;color:#666}.empty{padding:22px;text-align:center;color:var(--muted)}form.block-form{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:10px;align-items:end}label{font-size:13px;font-weight:bold;display:block;margin-bottom:5px}input,select{width:100%;padding:10px;border:1px solid #cbd2cc;border-radius:5px;background:white;color:var(--ink);font:inherit}.blocks{padding-left:20px}.blocks li{padding:5px 0}.fine{font-size:13px;color:var(--muted)}footer{text-align:center;background:#0e3028;color:#e8eee9;padding:22px;margin-top:40px;font-size:13px}@media(max-width:720px){.stats{grid-template-columns:1fr}.top{justify-content:center;text-align:center}.top nav{justify-content:center}form.block-form{grid-template-columns:1fr 1fr}.block-form .btn{grid-column:1/-1}}
+  </style>
+</head>
+<body>
+  <header class="top"><a class="brand" href="index.html">DAFFODILS<small>GUEST HOUSE · GOA</small></a><nav><a href="index.html">Home</a><a href="booking.html">Guest booking</a></nav></header>
+  <main>
+    <div class="title"><div><div class="eyebrow">Property management</div><h1>Host dashboard</h1></div><button id="export" class="btn secondary" type="button">Export requests (CSV)</button></div>
+    <div class="notice"><strong>Demo mode — not shared or secured.</strong> This dashboard is a front-end starter. Requests and blocked dates are stored only in this browser, with no login, server database, or OTA sync. Do not rely on it as the live source of room availability.</div>
+    <div class="stats"><div class="stat"><strong id="pendingCount">0</strong><span>Pending requests</span></div><div class="stat"><strong id="confirmedCount">0</strong><span>Confirmed locally</span></div><div class="stat"><strong id="blockedCount">0</strong><span>Blocked date ranges</span></div></div>
+    <section class="panel"><div class="section-title"><h2>Booking requests</h2><button class="btn danger small" id="clearCancelled" type="button">Clear cancelled</button></div><div id="requests"></div></section>
+    <section class="panel"><h2 style="margin:0 0 14px">Block a room</h2><form id="blockForm" class="block-form">
+      <div><label for="blockRoom">Room</label><select id="blockRoom" required></select></div><div><label for="blockStart">From (check-in)</label><input id="blockStart" type="date" required></div><div><label for="blockEnd">Until (check-out)</label><input id="blockEnd" type="date" required></div><div><label for="blockNote">Note (optional)</label><input id="blockNote" maxlength="80" placeholder="Maintenance"></div><button class="btn" type="submit">Add block</button>
+    </form><p class="fine">Check-out date is exclusive, matching hotel-night date ranges.</p><ul id="blocks" class="blocks"></ul></section>
+  </main>
+  <footer>Daffodils Guest House · Calangute, Goa</footer>
+  <script>
+    (() => {
+      const KEY='daffodils-booking-mvp-v1';
+      const roomNumbers=['101','102','103','104','201','202','203','204'];
+      const read=()=>{try{const d=JSON.parse(localStorage.getItem(KEY)||'{"requests":[],"blocked":[]}');return{requests:Array.isArray(d.requests)?d.requests:[],blocked:Array.isArray(d.blocked)?d.blocked:[]}}catch{return{requests:[],blocked:[]}}};
+      const save=d=>localStorage.setItem(KEY,JSON.stringify(d));
+      const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      roomNumbers.forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=`Room ${n}`;document.getElementById('blockRoom').appendChild(o)});
+      function render(){
+        const d=read();
+        document.getElementById('pendingCount').textContent=d.requests.filter(r=>r.status==='pending').length;
+        document.getElementById('confirmedCount').textContent=d.requests.filter(r=>r.status==='confirmed').length;
+        document.getElementById('blockedCount').textContent=d.blocked.length;
+        const host=document.getElementById('requests');
+        if(!d.requests.length){host.innerHTML='<div class="empty">No requests in this browser yet. Guest requests appear here only when submitted from this same browser.</div>'}
+        else {host.innerHTML=`<div class="table-wrap"><table><thead><tr><th>Request</th><th>Guest</th><th>Stay</th><th>Guests / room</th><th>Status</th><th>Actions</th></tr></thead><tbody>${[...d.requests].reverse().map(r=>`<tr><td>${escapeHtml(r.id)}<br><span class="fine">${escapeHtml((r.createdAt||'').slice(0,10))}</span></td><td>${escapeHtml(r.guest)}<br><a href="tel:${escapeHtml(r.phone)}">${escapeHtml(r.phone)}</a></td><td>${escapeHtml(r.checkin)} → ${escapeHtml(r.checkout)}</td><td>${escapeHtml(r.guests)} · ${escapeHtml(r.room)}</td><td><span class="status ${escapeHtml(r.status)}">${escapeHtml(r.status)}</span></td><td>${r.status==='pending'?`<button class="btn small" data-action="confirmed" data-id="${escapeHtml(r.id)}">Confirm</button> `:''}${r.status!=='cancelled'?`<button class="btn danger small" data-action="cancelled" data-id="${escapeHtml(r.id)}">Cancel</button>`:''}</td></tr>`).join('')}</tbody></table></div>`}
+        const list=document.getElementById('blocks');
+        list.innerHTML=d.blocked.length?d.blocked.map(b=>`<li>Room ${escapeHtml(b.room)} · ${escapeHtml(b.start)} to ${escapeHtml(b.end)}${b.note?' · '+escapeHtml(b.note):''} <button class="btn danger small" data-remove-block="${escapeHtml(b.id)}">Remove</button></li>`).join(''):'<li class="fine">No blocked dates added.</li>';
+      }
+      document.getElementById('requests').addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const d=read();const r=d.requests.find(x=>x.id===b.dataset.id);if(r){r.status=b.dataset.action;save(d);render()}});
+      document.getElementById('blocks').addEventListener('click',e=>{const b=e.target.closest('[data-remove-block]');if(!b)return;const d=read();d.blocked=d.blocked.filter(x=>x.id!==b.dataset.removeBlock);save(d);render()});
+      document.getElementById('blockForm').addEventListener('submit',e=>{e.preventDefault();const start=document.getElementById('blockStart').value,end=document.getElementById('blockEnd').value;if(end<=start){alert('End date must be after start date.');return}const d=read();d.blocked.push({id:`BL-${Date.now().toString(36)}`,room:document.getElementById('blockRoom').value,start,end,note:document.getElementById('blockNote').value.trim()});save(d);e.target.reset();render()});
+      document.getElementById('clearCancelled').addEventListener('click',()=>{const d=read();d.requests=d.requests.filter(r=>r.status!=='cancelled');save(d);render()});
+      document.getElementById('export').addEventListener('click',()=>{const d=read();const rows=[['Request ID','Name','Phone','Check-in','Check-out','Guests','Room','Status','Created'],...d.requests.map(r=>[r.id,r.guest,r.phone,r.checkin,r.checkout,r.guests,r.room,r.status,r.createdAt])];const csv=rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='daffodils-booking-requests.csv';a.click();URL.revokeObjectURL(a.href)});
+      render();
+    })();
+  </script>
+</body>
+</html>
